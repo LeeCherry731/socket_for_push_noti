@@ -5,7 +5,7 @@ const io = require("socket.io")(server);
 
 io.on("connection", (socket) => {
   /* … */
-  console.log(socket.id);
+  console.log(`connected ID : ${socket.id}`);
   io.emit("test", "testing");
 
   socket.on("msg", (data) => {
@@ -16,8 +16,8 @@ io.on("connection", (socket) => {
   socket.on("disconnect", (reason) => {
     // ...
     console.log(reason);
-    console.log(socket.rooms);
-    console.log(socket.sids);
+    console.log(`rooms: ${socket.rooms}`);
+    console.log(`sid: ${socket.sids}`);
   });
 });
 // io.on("msg", (data) => {
@@ -36,4 +36,8 @@ app.get("/", (req, res) => {
 //   io.emit("noti", "testing");
 // }, 10000);
 
-server.listen(3000);
+const port = 3000;
+
+server.listen(port, () => {
+  console.log(`server running on port : ${port}`);
+});
